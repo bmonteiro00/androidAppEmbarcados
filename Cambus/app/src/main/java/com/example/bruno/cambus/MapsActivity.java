@@ -80,10 +80,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void iterateOverJsonItems( JSONObject jo ) {
         Iterator<String> keys = jo.keys();
-
+        Object value = null;
         while( keys.hasNext() ) {
             String key = (String)keys.next();
-            Object value = null;
+            value = null;
             try {
                 value = jo.get(key);
             } catch (JSONException e) {
@@ -112,6 +112,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 {
                     lat = -23.608692899;
                     longi = -46.695984782;
+                }
+
+                if(key.equals("lat"))
+                {
+                    String lat1 = value.toString();
+
+                    if(lat1.startsWith("-"))
+                        lat = Integer.valueOf(lat1.substring(1)).doubleValue();
+                }
+
+                if(key.equals("lon"))
+                {
+                    String longi1 = value.toString();
+
+                    if(longi1.startsWith("-"))
+                        longi = Integer.valueOf(longi1.substring(1)).doubleValue();
                 }
 
                 if(key.equals("Name"))
